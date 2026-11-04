@@ -1,8 +1,8 @@
 # AI Risk Map — Full Corpus
 
-**Version 1.3 · October 2026 · © 2026 Evan Wheeler · Licensed [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)**
+**Version 1.4-draft (fork) · November 2026 · based on v1.3 · © 2026 Evan Wheeler · v1.4-draft changes by Unlock Open under the same license · Licensed [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)**
 
-12 domains · 55 categories · 196 risk factors
+12 domains · 55 categories · 198 risk factors
 
 ---
 
@@ -45,7 +45,7 @@ These are the rules the map was built by. Use them to judge whether something be
 
 ## Identifiers
 
-Every factor carries a permanent ID (`AIRM-001` onward; 196 active). IDs are flat, opaque and sequential. They encode nothing — not domain, not category, not priority. An ID is stable across versions; **the wording of a factor is not**. Cite the ID, not the sentence.
+Every factor carries a permanent ID (`AIRM-001` onward; 198 active). IDs are flat, opaque and sequential. They encode nothing — not domain, not category, not priority. An ID is stable across versions; **the wording of a factor is not**. Cite the ID, not the sentence.
 
 ## How to read the Source(s) field
 
@@ -163,7 +163,7 @@ You are helping me use the AI Risk Map. Follow these rules:
   <sub>Source: CRI GV-1.5.4; Original</sub>
 - **`AIRM-018`** — AI output relied upon as evidence in financial-reporting or other regulated control chains without recognizing the expansion of assurance scope  *(see also `AIRM-138`, Domain 8 — count both)*  
   <sub>Source: COSO GenAI 2026 p.13</sub>
-- **`AIRM-019`** — No reliable way to identify which artifacts, code, or analyses were AI-generated, so a systemic model or prompt flaw cannot be scoped or remediated after the fact  
+- **`AIRM-019`** — No reliable way to identify which artifacts, code, or analyses were AI-generated, so a systemic model or prompt flaw cannot be scoped or remediated after the fact  *(pointed to by `AIRM-199`, Domain 12 (missing safeguard))*  
   <sub>Source: OWASP AISVS AC.9 / AC.10; COSO GenAI 2026 (AI bill of materials)</sub>
 
 ## 2. Strategy & Value Realization
@@ -336,7 +336,7 @@ You are helping me use the AI Risk Map. Follow these rules:
 
 - **`AIRM-071`** — Direct prompt injection altering behavior or bypassing guardrails  
   <sub>Source: OWASP LLM01; DASF 9.1</sub>
-- **`AIRM-072`** — Indirect / cross-domain prompt injection via retrieved content  
+- **`AIRM-072`** — Indirect / cross-domain prompt injection via retrieved content  *(pointed to by `AIRM-198`, Domain 5 (more general))*  
   <sub>Source: OWASP LLM01; DASF 9.1 / 9.9</sub>
 - **`AIRM-073`** — Jailbreaks defeating safety controls and restrictions  *(split pair: other side in Domain 6, `AIRM-097` — count once; see also `AIRM-090`, Domain 6 (different cause) — count both)*  
   <sub>Source: OWASP LLM01; DASF 9.12</sub>
@@ -364,6 +364,8 @@ You are helping me use the AI Risk Map. Follow these rules:
   <sub>Source: DASF 7.3; ATLAS AML.T0010.004; Original</sub>
 - **`AIRM-081`** — Model-invented package, image, or endpoint names that resolve to adversary-registered artifacts, because the same hallucination recurs across users and model families  *(see also `AIRM-052`, Domain 4 — count both)*  
   <sub>Source: OWASP AISVS AC.13</sub>
+- **`AIRM-198`** — Instructions planted in sources the organization treats as trusted — its own repositories, vendored and open-source dependencies, and artifacts earlier agents committed — which development agents consume as instructions and act on with developer authority, so a component that is safe to execute still steers the agent that maintains the codebase  *(split pair: other side in Domain 12, `AIRM-199` — count once; see also `AIRM-072`, Domain 5 (more general) — count both; see also `AIRM-148`, Domain 9 (parallel) — count both)*  
+  <sub>Source: OWASP LLM01; OWASP LLM03; Original</sub>
 
 ### AI access & identity
 
@@ -429,7 +431,7 @@ You are helping me use the AI Risk Map. Follow these rules:
   <sub>Source: Weidinger V; Colorado HB 26-1263</sub>
 - **`AIRM-101`** — Erosion of meaningful human control over decisions  *(see also `AIRM-176`, Domain 12 (missing safeguard) — count both)*  
   <sub>Source: EU Art 14; MIT 5.2</sub>
-- **`AIRM-102`** — Human review, approval, and triage capacity cannot scale to the volume AI produces — code, alerts, content, decisions — so oversight gates degrade into rubber-stamping while still appearing effective  *(see also `AIRM-117`, Domain 7 — count both)*  
+- **`AIRM-102`** — Human review, approval, and triage capacity cannot scale to the volume AI produces — code, alerts, vulnerability findings, content, decisions — so oversight gates degrade into rubber-stamping while still appearing effective  *(see also `AIRM-117`, Domain 7 — count both)*  
   <sub>Source: COSO GenAI 2026; OWASP AISVS AC.4; CRI MP-3.5.4</sub>
 
 ## 7. Operations & Resilience
@@ -476,8 +478,8 @@ You are helping me use the AI Risk Map. Follow these rules:
   <sub>Source: DASF 12.3; CRI MS-2.4.4; Original</sub>
 - **`AIRM-117`** — Inadequate content-moderation / trust-&-safety operations at scale  *(pointed to by `AIRM-102`, Domain 6)*  
   <sub>Source: Colorado HB 26-1263; Original</sub>
-- **`AIRM-118`** — Safety guardrails on models relied on for defense refusing to assist incident response, blocking analysis of attack data  
-  <sub>Source: CSA HF post-mortem</sub>
+- **`AIRM-118`** — Safety guardrails on models relied on for defense refusing legitimate security work — incident response, attack-data analysis, vulnerability research, exploit validation, red-teaming, and malware analysis — so detection, validation, and response lag what the same models make possible elsewhere  *(see also `AIRM-191`, Domain 9 (parallel) — count both)*  
+  <sub>Source: CSA HF post-mortem; Original</sub>
 
 ### Change & lifecycle management
 
@@ -571,7 +573,7 @@ You are helping me use the AI Risk Map. Follow these rules:
 
 ### Open-source component risk
 
-- **`AIRM-148`** — Malicious or compromised open-source models / components  *(split pair: other side in Domain 5, `AIRM-078` — count once; pointed to by `AIRM-080`, Domain 5 (parallel))*  
+- **`AIRM-148`** — Malicious or compromised open-source models / components  *(split pair: other side in Domain 5, `AIRM-078` — count once; pointed to by `AIRM-080`, Domain 5 (parallel); pointed to by `AIRM-198`, Domain 5 (parallel))*  
   <sub>Source: OWASP LLM03; DASF 7.1; DASF 5.4</sub>
 - **`AIRM-149`** — Open-source AI dependencies abandoned by their maintainers, leaving no fixes, support, or upgrade path  *(pointed to by `AIRM-079`, Domain 5 (different cause))*  
   <sub>Source: OWASP LLM03; Original</sub>
@@ -579,7 +581,7 @@ You are helping me use the AI Risk Map. Follow these rules:
   <sub>Source: CRI GV-6.1.6; MAS AIRG §4.2 / fn 21; Original</sub>
 - **`AIRM-189`** — Model lineage undisclosed or unverifiable: the deployed model inherits weights, training data, or teacher-model traits its publisher label does not reveal, so an upstream flaw cannot be scoped to the models that descend from it  *(see also `AIRM-078`, Domain 5 (missing safeguard) — count both; pointed to by `AIRM-134`, Domain 8)*  
   <sub>Source: OWASP AISVS 6.2; Cisco/VAIL provenance-entanglement research 2026; Original</sub>
-- **`AIRM-191`** — Safety training absent, stripped, or eroded in a self-hosted or fine-tuned model (abliteration, drift from benign fine-tuning, or a variant sourced without it), so guardrails have nothing beneath them  
+- **`AIRM-191`** — Safety training absent, stripped, or eroded in a self-hosted or fine-tuned model (abliteration, drift from benign fine-tuning, or a variant sourced without it), so guardrails have nothing beneath them  *(pointed to by `AIRM-118`, Domain 7 (parallel))*  
   <sub>Source: NIST GenAI MS-2.7-008; IAISR; OWASP LLM03</sub>
 
 ## 10. Workforce, Human & Societal
@@ -673,17 +675,19 @@ You are helping me use the AI Risk Map. Follow these rules:
   <sub>Source: OWASP LLM06 / ASI</sub>
 - **`AIRM-178`** — Agent identity misuse, impersonation, or delegated-credential abuse  *(see also `AIRM-196`, Domain 5 (different cause) — count both; pointed to by `AIRM-082`, Domain 5 (parallel); pointed to by `AIRM-083`, Domain 5 (parallel))*  
   <sub>Source: OWASP ASI T9; DASF 13.9</sub>
-- **`AIRM-179`** — Third-party tool and connector servers adopted as a credentialed execution surface without the vetting applied to models or libraries  *(see also `AIRM-142`, Domain 9 (missing safeguard) — count both)*  
+- **`AIRM-179`** — Third-party tool and connector servers, and agent-steering content distributed as code — skills, rules files, plugins, and marketplace items — adopted as a credentialed execution surface without the vetting applied to models or libraries  *(see also `AIRM-142`, Domain 9 (missing safeguard) — count both)*  
   <sub>Source: OWASP AISVS C10.1 / AC.2; CSA AICM</sub>
 
 ### Memory & context integrity
 
-- **`AIRM-180`** — Memory poisoning corrupting agent state across sessions  
+- **`AIRM-180`** — Memory poisoning corrupting agent state across sessions  *(pointed to by `AIRM-199`, Domain 12 (parallel))*  
   <sub>Source: OWASP ASI T1; DASF 13.1; ATLAS AML.T0080.000; Original</sub>
 - **`AIRM-181`** — Context-window manipulation altering agent behavior  
   <sub>Source: OWASP ASI; OWASP LLM01</sub>
 - **`AIRM-182`** — Persistence of corrupted or sensitive data in agent memory  *(see also `AIRM-047`, Domain 3 (parallel) — count both)*  
   <sub>Source: OWASP ASI; OWASP AISVS 8.3; Original</sub>
+- **`AIRM-199`** — Trust boundaries drawn for execution and access do not hold for reading: agents consume the organization's own repositories, vendored code, and prior agent output as instructions without the handling applied to untrusted content, so an artifact one compromised agent commits persists in the codebase and propagates to every later agent, build, and downstream product  *(split pair: other side in Domain 5, `AIRM-198` — count once; see also `AIRM-180`, Domain 12 (parallel) — count both; see also `AIRM-019`, Domain 1 (missing safeguard) — count both)*  
+  <sub>Source: OWASP ASI T1; OWASP LLM01; Original</sub>
 
 ### Multi-agent orchestration
 
@@ -728,6 +732,7 @@ The test: would assessing both factors as separate scenarios count the same loss
 | Stranded investment | 2 strategic misjudgment | AIRM-021, AIRM-024 | 11 capital lost | AIRM-167 |
 | Jailbreak → dangerous uplift | 5 the attack | AIRM-073 | 6 the resulting uplift | AIRM-097 |
 | Accountability for autonomous action | 1 accountability undefined before the fact (governance) | AIRM-006 | 12 accountability gap once harm occurs (outcome) | AIRM-187 |
+| Development-agent poisoning through trusted sources | 5 planted instructions in a trusted source (the attack) | AIRM-198 | 12 trust boundary that does not hold for reading (the condition) | AIRM-199 |
 
 ### Part 2 — See-also pointers (different risks: count both)
 
@@ -789,6 +794,11 @@ Different risks worth reading together. Each pointer is one of: a more general f
 | `AIRM-178` Agent identity misuse, impersonation, or delegated-credential abuse | `AIRM-196` Insiders use AI agents to reach beyond their own access | Same outcome, different cause: someone abusing the agent's identity vs. an insider steering a sanctioned agent. |
 | `AIRM-057` Lack of robustness to edge cases and distribution shift | `AIRM-197` Inputs crafted to evade AI detection models | Same outcome, different cause: brittle behavior on unusual inputs vs. inputs crafted to exploit it. |
 | `AIRM-058` Small changes to the input produce very different output | `AIRM-197` Inputs crafted to evade AI detection models | Same outcome, different cause: input sensitivity in ordinary use vs. adversarial inputs that exploit it. |
+| `AIRM-198` Trusted repositories and dependencies carrying instructions that steer development agents | `AIRM-072` Indirect / cross-domain prompt injection via retrieved content | More general: any retrieved content can carry instructions; AIRM-198 is the case where the content sits inside the trust boundary and passes every supply-chain gate. |
+| `AIRM-198` Trusted repositories and dependencies carrying instructions that steer development agents | `AIRM-148` Malicious or compromised open-source models / components | Parallel: a component that is harmful to run vs. a component that is harmful to read. |
+| `AIRM-199` Codebase acts as persistent shared agent memory | `AIRM-180` Memory poisoning corrupting agent state across sessions | Parallel: one agent's memory store vs. the codebase as the memory every later agent reads. |
+| `AIRM-199` Codebase acts as persistent shared agent memory | `AIRM-019` No reliable way to identify which artifacts, code, or analyses were AI-generated | Safeguard: knowing which artifacts an agent produced is how a poisoned commit is scoped and removed. |
+| `AIRM-118` Defensive model refuses legitimate security work | `AIRM-191` Safety training stripped or eroded in a self-hosted model | Parallel: the common workaround for refusals is a self-hosted model whose safety training has been removed, which is the condition AIRM-191 names. |
 
 
 ---
@@ -906,6 +916,27 @@ SOURCE: CSA CISO post-mortem recommendations on ephemeral credentials and immuta
 SOURCE: raised in review of the containment factor. Guardrails, access scopes, evaluation thresholds, and approval gates drift as models are updated, tools added, and integrations grow, so controls are re-verified less often than the system changes. ASSESSMENT: clears the Gate B bounding principle. Held back from an earlier pre-release iteration on size grounds (Domain 7 already heavy). RESOLVED pre-release: measuring the reference-map benchmark from source showed a per-category range of 1-5 with max 5, so a fifth factor in Change & lifecycle sits within the reference range. Added.
 
 
+**Development agents poisoned through trusted sources, and the codebase as persistent agent memory — ADDED (v1.4-draft)**  
+SOURCE: software-development supply-chain review, November 2026 (Unlock Open fork). CONDITION: developers rely on agents to build software and glue code; those agents read the organization's own repositories, vendored and open-source dependencies, and artifacts earlier agents committed, and act on what they read with developer authority. Supply-chain controls (SCA, signatures, sandboxing, SBOMs) vet a component for what it does when executed; none inspects it for what it says to an agent. So a source inside the trust boundary passes every gate and is still consumed as instructions, and an artifact a compromised agent commits becomes input to every later agent, build, and downstream product on a timeline far longer than the session. GATE A: steering an author's judgment at scale through text does not exist without AI. NEIGHBORS CHECKED: AIRM-072 is the generic mechanism (any retrieved content can carry instructions; an email in an inbox is already handled as untrusted); AIRM-148 is a component harmful to run; AIRM-180 is one agent's memory store; AIRM-183 is a runtime cascade between live agents; AIRM-019 is the safeguard that scopes a poisoned commit after the fact; AIRM-107 is the dev environment reaching production. None names the trust-classification mismatch or the codebase as the persistence medium. ROUTED as a split pair under the split routing rule: the attack side (planted instructions) to D5 Supply-chain & artifact integrity as AIRM-198, the condition side (trust boundary that does not hold for reading, persistence in the codebase) to D12 Memory & context integrity as AIRM-199. Counting test: assessing both as separate scenarios would count one poisoned codebase twice. Count once. NOTE: 'software is everything, so the impact is broad' was raised as part of the same concern. It is an impact statement, not a condition, and was used as the priority argument rather than as a factor.
+
+**Dependencies as prompts — as a separate factor**  
+SOURCE: same review. PROPOSED as 'a component safe to execute is harmful to read'. WITHDRAWN on challenge: content an agent reads being treated as instructions is AIRM-072, and a dependency's README is the same mechanism as an email in an inbox, a ticket, or a wiki page. What survives is narrower: a pinned dependency sits inside the trust boundary and passes vetting that tests only execution, so the untrusted-content handling applied to an inbox is never applied to it. That trust-classification mismatch is what AIRM-198 / AIRM-199 carry. The reading mechanism alone was not added.
+
+**Injection via tickets, issues, and pull-request descriptions into development agents**  
+SOURCE: same review. DECLINED as a separate factor: an implementation-level instance of AIRM-072 (indirect injection via retrieved content), on the same reasoning that declined MCP as a category. Workshop example only.
+
+**Agent-steering content distributed as code: skills, rules files, plugins, marketplace items**  
+SOURCE: same review. PROPOSED as a new D12 factor. RESOLVED by widening AIRM-179, which covered third-party tool and connector servers only. The delta is a vetting gap on adoption: this content rides through the same channels as dependencies and marketplaces, is not a server and not a library, so neither the connector vetting nor the dependency vetting is applied to it, and it acts with the developer's authority. Not a new technology slot, consistent with the MCP decision.
+
+**Defender access to frontier capability blocked by guardrails — attacker/defender asymmetry**  
+SOURCE: same review. The concern: attackers run models without safety training while defenders are refused the same capability for legitimate security work. RESOLVED by widening AIRM-118, which named incident response only (CSA post-mortem source). The in-scope condition is the organization's own defensive work being refused across the lifecycle: vulnerability research, exploit validation, red-teaming, malware analysis. The asymmetry itself is a statement about attacker capability and stays out of the wording: it belongs to threat capability in a FAIR scenario, not to the map (see the abliteration entry above). It is recorded here as the discovery argument: most organizations do not notice they are refused until mid-incident. OWNER QUESTION, open: widened beyond incident response the factor arguably belongs to security engineering (D5) rather than Operations (D7). Left in D7 pending the author's view, since no D5 category fits without a new one. See-also added to AIRM-191, the usual workaround.
+
+**The organization's own AI-driven vulnerability discovery outrunning remediation capacity**  
+SOURCE: same review. RESOLVED by rewording AIRM-102 to name vulnerability findings among the outputs review and triage capacity cannot absorb. Adoption-side, so in scope. Not a new factor: the volume mechanism is AIRM-102's.
+
+**AI-accelerated vulnerability discovery and exploitation shrinking the patch window — NOT ADDED**  
+SOURCE: same review. NOT ADDED: others' adversarial or malicious use of AI against the organization is excluded by subject (see Deliberately excluded, decision August 2026, narrowed October 2026). Recorded because it is a predictable future proposal. The only framing with a path onto the map is a Gate B argument about the organization's OWN vulnerability program: when exploit development is automated, patch cadence, exposure windows, and triage must be run differently. That would require reopening the recorded boundary and is left to the upstream author.
+
 ---
 
 ## Change log (factor grain)
@@ -957,6 +988,14 @@ SOURCE: raised in review of the containment factor. Guardrails, access scopes, e
 | v1.3 | October 2026 | x-ref (see-also) | AIRM-015, 036, 038, 039, 044, 056, 063, 069, 079, 080, 082, 083, 090, 093, 101, 108, 109, 110, 112, 113, 132, 139, 140, 149, 170, 172, 176, 177, 178, 189 | Markers removed where the v1.2 pair linked different risks; each such link is now a see-also pointer (count both). The AIRM-015 / AIRM-093 link was dropped. |
 | v1.3 | October 2026 | cross-ref sheet | — | 12 new see-also pointers, three of them between neighboring factors kept separate on purpose (AIRM-004/005, 153/195, 160/161; see Scope decisions), plus 22 converted from v1.2 pairs. |
 | v1.3 | October 2026 | documentation | — | Scope exclusion narrowed to others' adversarial or malicious use of AI, so the scope is wider. 'Two-faced pair' renamed 'split pair'; the routing rule renamed accordingly. |
+| v1.4-draft | November 2026 | added | AIRM-198 | Instructions planted in trusted sources (repositories, vendored dependencies, committed artifacts) that development agents act on with developer authority. D5 Supply-chain & artifact integrity. Split pair with AIRM-199. |
+| v1.4-draft | November 2026 | added | AIRM-199 | Trust boundaries drawn for execution do not hold for reading; the codebase as persistent shared agent memory, so one poisoned commit propagates to every later agent and build. D12 Memory & context integrity. Split pair with AIRM-198. |
+| v1.4-draft | November 2026 | reworded | AIRM-179 | Widened: agent-steering content distributed as code (skills, rules files, plugins, marketplace items), not only tool and connector servers. |
+| v1.4-draft | November 2026 | reworded | AIRM-118 | Widened: refusals across the defensive lifecycle (vulnerability research, exploit validation, red-teaming, malware analysis), not only incident response. 'Original' added to sources. Owner question (D7 vs D5) recorded in Scope decisions. |
+| v1.4-draft | November 2026 | reworded | AIRM-102 | Vulnerability findings named among the outputs review capacity cannot absorb. |
+| v1.4-draft | November 2026 | x-ref | AIRM-198, AIRM-199 | New split pair; markers →12 and →5. 7 pairs, 16 marked factors. |
+| v1.4-draft | November 2026 | cross-ref sheet | — | 5 new see-also pointers: AIRM-198→072, 198→148, 199→180, 199→019, 118→191. |
+| v1.4-draft | November 2026 | documentation | — | Seven Scope-decision entries recorded for the software-development supply-chain review. Poster files (PDF, PNG, SVG) not regenerated; they remain at v1.3. Provenance Appendix counts updated for the touched sources only. |
 
 ---
 
@@ -986,6 +1025,7 @@ Factor wording changes between versions. IDs do not. Cite IDs.
 | **v1.1** | September 2026 | 189 | Poster redesign: new typeface (Figtree), lighter header with a reading key, categories set as colored text, and cross-reference markers drawn as pills in the target domain's color. Cross-reference corrections: two markers that pointed at their own domain were removed (AIRM-046, AIRM-152), and AIRM-187 now shows both of its targets, Governance and Legal, where v1.0 printed only the first. The D1/D12 accountability pair (AIRM-006 / AIRM-187) was added to the Cross-references sheet, where it had been recorded only in Scope decisions. No factors added, removed, reworded, or re-homed; all identifiers unchanged. |
 | **v1.2** | September 2026 | 189 | Clarifications and cross-reference corrections from external review. Control framing: the map is not a control standard; factors may imply a missing or deficient control condition, but none is phrased as a control to implement and the map does not say which control closes a gap. Cross-references: »n now means one thing, the other face of a two-faced pair (count once). Both faces of all 15 pairs are marked, where v1.1 marked both faces of only four and left three pairs unmarked. The one-way see-also pointers that shared the same marker were moved to a new part of the Cross-references sheet (20 pointers, listed by ID) and no longer appear on the poster. The build now fails if a marker and the pair list disagree in either direction. Net: 32 markers on 30 factors, down from 35. The Transparency pair listed AIRM-092 in error; corrected to AIRM-093. The markdown corpus now carries the design principles (scope, retention gates, factor form, two-faced rule, markers). No factors added, removed, reworded, or re-homed; all identifiers unchanged. |
 | **v1.3** | October 2026 | 196 | Content release: 12 domains, 55 categories, 196 active factors. ADDED, 8 factors: agent actions third parties cannot attribute to you (AIRM-190); safety training stripped or eroded in a self-hosted model (AIRM-191); changes to your own AI service made without notice to customers (AIRM-192); your advantage eroding as competitors and customers approximate it with AI (AIRM-193); AI agents disintermediating you from your customers (AIRM-194); leaders managing AI like a conventional IT rollout (AIRM-195); insiders using AI agents to reach beyond their own access (AIRM-196); inputs crafted to evade AI detection models (AIRM-197). NEW CATEGORY: Competitive position (Strategy & Value Realization) holds AIRM-193, AIRM-194, and AIRM-026, moved from Use-case selection & sourcing. MERGED: AIRM-171 into AIRM-165; AIRM-171 keeps a retired tombstone row. REWORDED, 19 factors. Most widen or clarify the same condition. Four narrow it, so check any earlier mapping: AIRM-149 now covers abandoned dependencies only (known vulnerabilities are AIRM-079); AIRM-114 now covers deliberate denial-of-wallet only (unmanaged usage is AIRM-164); AIRM-122 now covers drift only (poisoning through a learning loop is AIRM-065); AIRM-153 now covers workforce literacy only (leadership understanding is AIRM-195). AIRM-161 is clarified from a consequence (eroded trust) to its cause (customers avoiding AI-mediated services). SCOPE: the exclusion now reads others' adversarial or malicious use of AI against you; the effect of competitors' and customers' AI on the value of your own strategy is in scope. CROSS-REFERENCES: every v1.2 pair was re-tested link by link against one question: would assessing both as separate scenarios count the same loss twice? Six split pairs remain (14 marked factors, down from 32); the other links became see-also pointers, which count both. 'Two-faced pair' is renamed 'split pair'. Identifiers, columns, and file names unchanged. |
+| **v1.4-draft** | November 2026 | 198 | Fork draft (Unlock Open), not an upstream release. Software-development supply-chain review. ADDED, 2 factors as a split pair: instructions planted in trusted sources that development agents act on (AIRM-198, D5) and trust boundaries that do not hold for reading, so the codebase becomes persistent shared agent memory (AIRM-199, D12). REWORDED, 3 factors, all widening: AIRM-179 (skills, rules files, plugins as an unvetted execution surface), AIRM-118 (defensive refusals across the whole security lifecycle), AIRM-102 (vulnerability findings among the outputs review cannot absorb). CROSS-REFERENCES: 7 split pairs (16 marked factors); 5 new see-also pointers. SCOPE: seven decisions recorded, including one candidate left outside the boundary (AI-accelerated exploitation shrinking the patch window). The poster is not regenerated and remains at v1.3; the new factors have not been through the upstream citation audit. Identifiers, columns, and file names unchanged. |
 
 ---
 

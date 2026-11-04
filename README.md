@@ -10,9 +10,11 @@ Most teams naturally gravitate toward familiar concerns like hallucinations, pro
 
 It is not a risk library or exhaustive catalog. It is a practical tool designed to spark better conversations and uncover overlooked risks.
 
-12 domains · 55 categories · 196 risk factors · one page.
+12 domains · 55 categories · 198 risk factors · one page.
 
-**Using an earlier version?** v1.3 adds eight factors and narrows four. See [What changed in v1.3](#what-changed-in-v13) before you update an existing mapping.
+**This is a fork.** It carries a v1.4-draft on top of Evan Wheeler's v1.3: two new factors and three widened ones from a software-development supply-chain review. The CSV, markdown, and workbook are updated; the poster files are not regenerated and remain at v1.3. See [What changed in v1.4-draft](#what-changed-in-v14-draft).
+
+**Using an earlier version?** v1.4-draft adds two factors and widens three. v1.3 adds eight factors and narrows four. See [What changed in v1.3](#what-changed-in-v13) before you update an existing mapping.
 
 ---
 
@@ -79,6 +81,27 @@ The column layout is frozen at v1.0 — adding, removing, or reordering a column
 | I | `Superseded by` | Surviving ID after a merge |
 
 The workbook's **Cross-references** sheet is authoritative. Part 1 lists each split pair with the factor IDs on both sides; Part 2 lists each see-also pointer from one ID to another. Use the sheet, not the `X-ref` column, to count. Factor-level changes between versions are on the **Change log** sheet.
+
+## What changed in v1.4-draft
+
+A fork draft, not an upstream release. Nothing cited has disappeared: identifiers, columns, and file names are unchanged. The reasoning for every decision, including what was considered and not added, is on the workbook's **Scope decisions** sheet and in the markdown under *Considered and not added*. The poster is not regenerated; `AI-Risk-Map.pdf`, `.png`, and `.svg` still show v1.3.
+
+**New: development agents poisoned through trusted sources**
+
+- **Two factors, as a split pair.** `AIRM-198` (Security, Supply-chain & artifact integrity): instructions planted in sources the organization treats as trusted, including its own repositories, vendored and open-source dependencies, and artifacts earlier agents committed, which development agents act on with developer authority. `AIRM-199` (Autonomy, Memory & context integrity): trust boundaries drawn for execution and access do not hold for reading, so the codebase becomes persistent shared agent memory and one poisoned commit propagates to every later agent, build, and downstream product. Count the pair once.
+- **Why these and not "AI-generated code" or "injection via tickets".** Both of those were declined: the first by the upstream author in v1.3, the second here as an instance of `AIRM-072`. What the map lacked was the trust-classification mismatch: supply-chain controls vet a component for what it does when run, none inspect it for what it says to an agent, so a dependency inside the trust boundary passes every gate and is still consumed as instructions.
+
+**Widened**
+
+- `AIRM-179` now covers agent-steering content distributed as code (skills, rules files, plugins, marketplace items), not only tool and connector servers.
+- `AIRM-118` now covers defensive refusals across the whole security lifecycle (vulnerability research, exploit validation, red-teaming, malware analysis), not only incident response. The attacker-defender asymmetry that motivates it stays out of the wording because attacker capability is out of scope by subject. Whether the widened factor belongs to Security rather than Operations is left open for the upstream author.
+- `AIRM-102` names vulnerability findings among the outputs review capacity cannot absorb.
+
+**Recorded and left outside the boundary**
+
+- AI-accelerated vulnerability discovery and exploitation shrinking the patch window. Others' adversarial use of AI is excluded by subject in the upstream scope decision. The only route onto the map is a management-delta argument about running your own vulnerability program differently, which would mean reopening that boundary upstream.
+
+**Caveat.** The two new factors and the three rewords have not been through the upstream author's citation audit. Sources are cited at document or item level only where the item is certain.
 
 ## What changed in v1.3
 
